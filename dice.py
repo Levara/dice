@@ -2,7 +2,7 @@
 import random
 import os,sys
 
-def main():
+def parse_params():
     if len(sys.argv) == 2:
         num_dices = int(sys.argv[1])
         num_sides = 6
@@ -12,7 +12,13 @@ def main():
     else:
         print("Wrong number of arguments!")
         print("Usage: python dice.py [number_of_dices] [number_of_sides]")
-        return 1
+        exit(1)
+    return [num_dices, num_sides]
+
+
+def main():
+
+    num_dices, num_sides = parse_params()
 
     for dice in range(num_dices):
         roll = random.randint(1,num_sides)
