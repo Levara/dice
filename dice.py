@@ -15,15 +15,16 @@ def parse_params():
         exit(1)
     return [num_dices, num_sides]
 
-
 def main():
-
     num_dices, num_sides = parse_params()
 
-    for dice in range(num_dices):
-        roll = random.randint(1,num_sides)
-        print(f'Dice [{dice+1}] roll is: {roll}')
+    line = None
+    while line != "exit":
+        line = input("Press ENTER for roll, type exit to exit the program: ")
 
+        for dice in range(num_dices):
+            roll = random.randint(1,num_sides)
+            print(f'Dice [{dice+1}] roll is: {roll}')
 
 if __name__ == "__main__":
     main()
