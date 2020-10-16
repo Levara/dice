@@ -2,6 +2,21 @@
 import random
 import os,sys
 
+class Dice(object):
+
+    """Dice class handles dices configuration and rolling of the dice."""
+
+    def __init__(self, num_sides, dice_id):
+        """TODO: to be defined1. """
+        self.num_sides = 6
+        self.id = dice_id
+
+    def roll(self):
+        roll = random.randint(1,self.num_sides)
+        print(f'Dice [{self.id}] roll is: {roll}')
+
+        
+
 def parse_params():
     if len(sys.argv) == 2:
         num_dices = int(sys.argv[1])
@@ -17,6 +32,7 @@ def parse_params():
 
 def main():
     num_dices, num_sides = parse_params()
+    dices = [ Dice(num_sides, dice_id) for dice_id in range(1,num_dices+1) ] 
 
     line = None
     print("Type help for commands, exit to exit")
@@ -68,9 +84,8 @@ def main():
                 print("!! Command not understood. See help for more info !!")
                 continue
 
-            for dice in range(num_dices):
-                roll = random.randint(1,num_sides)
-                print(f'Dice [{dice+1}] roll is: {roll}')
+            for dice in dices:
+                dice.roll()
 
 if __name__ == "__main__":
     main()
