@@ -21,7 +21,7 @@ def main():
     line = None
     print("Type help for commands, exit to exit")
     while True: 
-        line = input("Roll? >> ")
+        line = input(f"Roll {num_dices}d{num_sides}? >> ")
 
         if line == "exit":
             exit(0)
@@ -50,7 +50,24 @@ def main():
             print("config    starts the configuration wizard")
             print("exit      exits the program")
 
-        elif line == "":
+        else:
+            if line != "" and int(line[0]) in range(1,10):
+                num_dices_str, num_sides_str = line.split("d")
+                num_dices_in = int(num_dices_str)
+                num_sides_in = int(num_sides_str)
+                if num_dices_in >= 1 and num_dices_in < 5 and \
+                   num_sides_in >= 4 and num_sides_in <= 20:
+                    num_dices = num_dices_in
+                    num_sides = num_sides_in
+                else:
+                    print("!! Wrong number of dices or sides !!")
+                    continue
+            elif line == "":
+                pass
+            else:
+                print("!! Command not understood. See help for more info !!")
+                continue
+
             for dice in range(num_dices):
                 roll = random.randint(1,num_sides)
                 print(f'Dice [{dice+1}] roll is: {roll}')
