@@ -10,7 +10,7 @@ class Dice(object):
         """ * num_sides     number of sides for a dice 
             * dice_id       id of the created dice
         """
-        self.num_sides = 6
+        self.num_sides = num_sides
         self.id = dice_id
 
     def roll(self):
@@ -24,7 +24,8 @@ class Hand(object):
     """
 
     def __init__(self, num_dices, num_sides):
-        self.dices = [ Dice(num_sides, dice_id) for dice_id in range(1,num_dices+1) ]
+        self.dices = []
+        self.update(num_dices, num_sides)
 
     def roll(self):
         for dice in self.dices:
@@ -56,6 +57,8 @@ class Hand(object):
         else:
             print("!! Wrong number of dices or sides !!")
 
+    def __str__(self):
+        return f'{len(self.dices)}d{self.dices[0].num_sides}'
 
 
 def parse_params():
@@ -78,7 +81,7 @@ def main():
     line = None
     print("Type help for commands, exit to exit")
     while True: 
-        line = input(f"Roll {num_dices}d{num_sides}? >> ")
+        line = input(f"Roll {hand}? >> ")
 
         if line == "exit":
             exit(0)
